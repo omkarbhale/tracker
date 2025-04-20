@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "outDir": "dist",                 // Can be overridden by esbuild
+    "rootDir": "./src/main",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "types": ["node", "electron"]
+  },
+  "include": ["src/main/**/*"],
+  "exclude": ["node_modules"]
+}

@@ -10,6 +10,7 @@ export const createOrShowWindow = () => {
 		return;
 	}
 
+	console.log(__dirname);
 	window = new BrowserWindow({
 		width: 800,
 		height: 600,
@@ -18,7 +19,14 @@ export const createOrShowWindow = () => {
 			sandbox: false,
 			contextIsolation: true,
 		},
+		icon: path.join(__dirname, "./assets/icon.png"),
+		// maximizable: false,
+		// resizable: false,
+		minWidth: 800,
+		minHeight: 500,
 	});
+	window.setMenu(null);
+	window.maximize();
 
 	if (app.isPackaged) {
 		window.loadFile("index.html");

@@ -1,5 +1,5 @@
 {
-	"name": "electron-rabbit",
+	"name": "sstracker",
 	"version": "1.0.0",
 	"main": "main.js",
 	"scripts": {
@@ -13,8 +13,8 @@
 		"dist": "npm run build && electron-builder"
 	},
 	"build": {
-		"appId": "com.steepgraph.electron-rabbit",
-		"productName": "Electron Rabbit",
+		"appId": "com.omkarb.sstracker",
+		"productName": "SSTracker",
 		"files": [
 			"**/*"
 		],
@@ -34,9 +34,9 @@
 		}
 	},
 	"keywords": [],
-	"author": "",
+	"author": "Omkar Bhale",
 	"license": "ISC",
-	"description": "",
+	"description": "Take screenshots periodically - even in background!",
 	"devDependencies": {
 		"@types/react": "^19.1.2",
 		"@types/react-dom": "^19.1.2",

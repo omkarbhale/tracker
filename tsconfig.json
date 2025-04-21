@@ -4,13 +4,13 @@
     "module": "CommonJS",
     "moduleResolution": "Node",
     "outDir": "dist",                 // Can be overridden by esbuild
-    "rootDir": "./src/main",
+    "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "types": ["node", "electron"]
   },
-  "include": ["src/main/**/*"],
+  "include": ["src/main/**/*", "src/preload/**/*"],
   "exclude": ["node_modules"]
 }

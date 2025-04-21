@@ -1,6 +1,10 @@
 import { app } from "electron";
 import { createOrShowWindow } from "./utils/window";
 
+// Register IPC handlers
+import { registerIpcHandlers } from "./ipc/index";
+registerIpcHandlers();
+
 app.whenReady().then(() => {
 	createOrShowWindow();
 

@@ -44,7 +44,7 @@ esbuild
 	.then(() => {
 		// Build preload.ts to preload.js
 		return esbuild.build({
-			entryPoints: ["src/main/preload.ts"],
+			entryPoints: ["src/preload/preload.ts"],
 			bundle: true,
 			platform: "node",
 			outfile: "dist/preload.js",
@@ -65,7 +65,6 @@ esbuild
 		for (const file of srcFiles) {
 			const srcFilePath = path.join(srcPath, file);
 			const destFilePath = path.join(destinationPath, file);
-			console.log(`Copying ${srcFilePath} to ${destFilePath}`);
 			await fsp.copyFile(srcFilePath, destFilePath);
 		}
 	})

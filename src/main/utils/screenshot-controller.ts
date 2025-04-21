@@ -1,4 +1,4 @@
-import * as screenshot from "screenshot-desktop";
+import screenshot from "screenshot-desktop";
 import * as path from "path";
 import * as fs from "fs";
 import * as fsp from "fs/promises";
@@ -31,7 +31,7 @@ export class ScreenshotController {
 		const filepath = path.join(dateFolder, filename);
 
 		try {
-			await screenshot.default({ filename: filepath });
+			await screenshot({ filename: filepath });
 			console.log(`Screenshot saved to: ${filepath}`);
 		} catch (err) {
 			console.error("Failed to take screenshot:", err);

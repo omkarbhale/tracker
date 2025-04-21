@@ -10,8 +10,8 @@ function App() {
 		intervalMs: 5000,
 		format: "png",
 	});
-	const [screenshots, setScreenshots] = useState([]); // Store screenshots
-	const [isCapturing, setIsCapturing] = useState(false);
+	// const [screenshots, setScreenshots] = useState([]);
+	const [isCapturing, setIsCapturing] = useState<boolean | null>(null);
 
 	useEffect(() => {
 		const fetchSettings = async () => {
@@ -45,7 +45,8 @@ function App() {
 					body: "Screenshotting has started successfully.",
 				});
 			});
-		} else {
+		} else if (isCapturing === false) {
+			// Stop screenshotting
 			window.api.invoke("stop-screenshotting").then(() => {
 				window.api.invoke("show-notification", {
 					title: "Screenshotting Stopped",
@@ -64,7 +65,7 @@ function App() {
 			<div className="flex-1 p-8">
 				{/* Settings Panel */}
 				<SettingsPanel
-					disabled={isCapturing}
+					disabled={isCapturing ? true : false}
 					settings={settings}
 					setSettings={setSettings}
 					startCapture={() => setIsCapturing(true)}

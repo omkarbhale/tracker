@@ -1,22 +1,35 @@
 import React, { useState, useEffect } from "react";
 
 function ScreenshotCountdown() {
-	const [secondsRemaining, setSecondsRemaining] = useState(5); // Countdown starts at 10 seconds
+	const [secondsRemaining, setSecondsRemaining] = useState(-1);
 
 	useEffect(() => {
-		if (secondsRemaining === 0) return; // Stop when countdown reaches 0
+		const timer = setInterval(async () => {
+			const nextScreenshotTime = await window.api.invoke(
+				"get-time-until-next-screenshot"
+			);
+			console.log(nextScreenshotTime);
+			setSecondsRemaining(nextScreenshotTime);
+		}, 500);
 
-		const timer = setInterval(() => {
-			setSecondsRemaining((prev) => prev - 1);
-		}, 1000);
-
-		return () => clearInterval(timer); // Clean up the timer when the component unmounts
+		return () => {
+			clearInterval(timer);
+		};
 	}, [secondsRemaining]);
 
 	return (
 		<div className="bg-white p-6 rounded-lg shadow-md mb-6 text-center">
-			<h2 className="text-xl mb-4">Next Screenshot in:</h2>
-			<div className="text-3xl font-bold">{secondsRemaining} seconds</div>
+			{secondsRemaining > 0 && (
+				<>
+					<h2 className="text-xl mb-4">Next Screenshot in:</h2>
+					<div className="text-3xl font-bold">
+						{Math.floor(secondsRemaining / 1000)} seconds
+					</div>
+				</>
+			)}
+			{secondsRemaining <= 0 && (
+				<h2 className="text-xl mb-4">No active screenshot</h2>
+			)}
 		</div>
 	);
 }

@@ -16,6 +16,7 @@ function getFormattedTime(): string {
 
 export class ScreenshotController {
 	private timer: NodeJS.Timeout | null = null;
+	private nextScreenshotTime: number | null = null;
 
 	constructor(private settings: ScreenshotSettings) {}
 
@@ -43,6 +44,7 @@ export class ScreenshotController {
 	}
 
 	private scheduleNext(): void {
+		this.nextScreenshotTime = Date.now() + this.settings.intervalMs;
 		this.timer = setTimeout(async () => {
 			await this.takeScreenshot();
 			this.scheduleNext();
@@ -60,6 +62,7 @@ export class ScreenshotController {
 		if (this.timer) {
 			clearTimeout(this.timer);
 			this.timer = null;
+			this.nextScreenshotTime = null;
 			console.log("Screenshot capture stopped.");
 		}
 	}
@@ -70,5 +73,11 @@ export class ScreenshotController {
 			this.stop();
 			this.start();
 		}
+	}
+
+	public getTimeUntilNextScreenshot(): number | null {
+		if (this.nextScreenshotTime === null) return null;
+		const remaining = this.nextScreenshotTime - Date.now();
+		return remaining > 0 ? remaining : 0;
 	}
 }

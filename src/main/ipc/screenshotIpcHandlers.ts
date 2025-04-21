@@ -5,6 +5,7 @@ import {
 	startScreenshotting,
 	stopScreenshotting,
 	updateSettings,
+	getTimeUntilNextScreenshot,
 } from "../utils/screenshotManager";
 
 export function screenshotIpcHandlers() {
@@ -17,6 +18,10 @@ export function screenshotIpcHandlers() {
 	});
 
 	ipcMain.handle("get-settings", () => getSettings());
+
+	ipcMain.handle("get-time-until-next-screenshot", () => {
+		return getTimeUntilNextScreenshot();
+	});
 
 	ipcMain.handle("screenshot-now", async (_event, screenshotPath: string) => {
 		return screenshotDesktop({ filename: screenshotPath });

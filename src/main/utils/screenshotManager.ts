@@ -24,3 +24,7 @@ export function startScreenshotting() {
 export function stopScreenshotting() {
 	controller.stop();
 }
+
+export function getTimeUntilNextScreenshot() {
+	return controller.getTimeUntilNextScreenshot();
+}

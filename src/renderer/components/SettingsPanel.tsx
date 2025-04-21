@@ -35,27 +35,6 @@ function SettingsPanel({
 		<div className="bg-white p-6 rounded-lg shadow-md mb-6">
 			<h2 className="text-xl mb-4">Settings</h2>
 
-			<div className="mb-4 rounded flex grid grid-cols-2 gap-4">
-				<button
-					className={
-						"bg-green-500 p-2 border rounded hover:bg-green-600 text-white " +
-						(disabled ? "hidden" : "")
-					}
-					onClick={() => startCapture()}
-				>
-					Start
-				</button>
-				<button
-					className={
-						"bg-red-500 p-2 border rounded hover:bg-red-600 text-white " +
-						(disabled ? "" : "hidden")
-					}
-					onClick={() => stopCapture()}
-				>
-					Stop
-				</button>
-			</div>
-
 			{/* Directory */}
 			<div className="mb-4">
 				<label className="block text-sm font-medium">Directory</label>
@@ -99,6 +78,27 @@ function SettingsPanel({
 					<option value="png">PNG</option>
 					<option value="jpg">JPG</option>
 				</select>
+			</div>
+
+			<div className="mb-4 rounded flex grid grid-cols-2 gap-4">
+				<button
+					className={
+						"bg-green-500 p-2 border rounded hover:bg-green-600 text-white " +
+						(disabled ? "hidden" : "")
+					}
+					onClick={() => startCapture()}
+				>
+					Start
+				</button>
+				<button
+					className={
+						"bg-red-500 p-2 border rounded hover:bg-red-600 text-white " +
+						(disabled ? "" : "hidden")
+					}
+					onClick={() => stopCapture()}
+				>
+					Stop
+				</button>
 			</div>
 		</div>
 	);

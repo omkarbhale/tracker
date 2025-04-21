@@ -7,11 +7,20 @@ export interface Settings {
 }
 
 interface SettingsPanelProps {
+	disabled: boolean;
 	settings: Settings;
 	setSettings: React.Dispatch<React.SetStateAction<Settings>>;
+	startCapture: () => void;
+	stopCapture: () => void;
 }
 
-function SettingsPanel({ settings, setSettings }: SettingsPanelProps) {
+function SettingsPanel({
+	disabled,
+	settings,
+	setSettings,
+	startCapture,
+	stopCapture,
+}: SettingsPanelProps) {
 	const handleUpdate = (
 		e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
 	) => {
@@ -26,6 +35,21 @@ function SettingsPanel({ settings, setSettings }: SettingsPanelProps) {
 		<div className="bg-white p-6 rounded-lg shadow-md mb-6">
 			<h2 className="text-xl mb-4">Settings</h2>
 
+			<div className="mb-4 rounded flex grid grid-cols-2 gap-4">
+				<button
+					className="bg-green-500 p-2 border rounded hover:bg-green-600 text-white"
+					onClick={() => startCapture()}
+				>
+					Start
+				</button>
+				<button
+					className="bg-red-500 p-2 border rounded hover:bg-red-600 text-white"
+					onClick={() => stopCapture()}
+				>
+					Stop
+				</button>
+			</div>
+
 			{/* Directory */}
 			<div className="mb-4">
 				<label className="block text-sm font-medium">Directory</label>
@@ -36,6 +60,7 @@ function SettingsPanel({ settings, setSettings }: SettingsPanelProps) {
 					onChange={handleUpdate}
 					className="w-full p-2 border border-gray-300 rounded mt-2"
 				/>
+				{/* TODO directory picker */}
 			</div>
 
 			{/* Interval */}

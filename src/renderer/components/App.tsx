@@ -21,12 +21,30 @@ function App() {
 		fetchSettings();
 
 		// Fetch existing screenshots
-		const fetchScreenshots = async () => {
-			const screenshotsList = await window.api.invoke("get-screenshots");
-			setScreenshots(screenshotsList);
-		};
-		fetchScreenshots();
+		// const fetchScreenshots = async () => {
+		// 	const screenshotsList = await window.api.invoke("get-screenshots");
+		// 	setScreenshots(screenshotsList);
+		// };
+		// fetchScreenshots();
 	}, []);
+
+	useEffect(() => {
+		window.api.invoke("update-settings", settings).then(() => {
+			console.log("Settings updated:", settings);
+		});
+	}, [settings]);
+
+	useEffect(() => {
+		if (isCapturing) {
+			window.api.invoke("start-screenshotting").then(() => {
+				console.log("Screenshotting started");
+			});
+		} else {
+			window.api.invoke("stop-screenshotting").then(() => {
+				console.log("Screenshotting stopped");
+			});
+		}
+	}, [isCapturing]);
 
 	return (
 		<div className="flex min-h-screen bg-gray-100">
@@ -36,7 +54,13 @@ function App() {
 			{/* Main content */}
 			<div className="flex-1 p-8">
 				{/* Settings Panel */}
-				<SettingsPanel settings={settings} setSettings={setSettings} />
+				<SettingsPanel
+					disabled={isCapturing}
+					settings={settings}
+					setSettings={setSettings}
+					startCapture={() => setIsCapturing(true)}
+					stopCapture={() => setIsCapturing(false)}
+				/>
 
 				{/* Screenshot Countdown */}
 				{!isCapturing && <ScreenshotCountdown />}

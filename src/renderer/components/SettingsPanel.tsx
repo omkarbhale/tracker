@@ -37,13 +37,19 @@ function SettingsPanel({
 
 			<div className="mb-4 rounded flex grid grid-cols-2 gap-4">
 				<button
-					className="bg-green-500 p-2 border rounded hover:bg-green-600 text-white"
+					className={
+						"bg-green-500 p-2 border rounded hover:bg-green-600 text-white " +
+						(disabled ? "hidden" : "")
+					}
 					onClick={() => startCapture()}
 				>
 					Start
 				</button>
 				<button
-					className="bg-red-500 p-2 border rounded hover:bg-red-600 text-white"
+					className={
+						"bg-red-500 p-2 border rounded hover:bg-red-600 text-white " +
+						(disabled ? "" : "hidden")
+					}
 					onClick={() => stopCapture()}
 				>
 					Stop
@@ -58,9 +64,9 @@ function SettingsPanel({
 					name="directory"
 					value={settings.directory}
 					onChange={handleUpdate}
+					disabled={disabled}
 					className="w-full p-2 border border-gray-300 rounded mt-2"
 				/>
-				{/* TODO directory picker */}
 			</div>
 
 			{/* Interval */}
@@ -73,6 +79,7 @@ function SettingsPanel({
 					name="intervalMs"
 					value={settings.intervalMs}
 					onChange={handleUpdate}
+					disabled={disabled}
 					className="w-full p-2 border border-gray-300 rounded mt-2"
 				/>
 			</div>
@@ -86,6 +93,7 @@ function SettingsPanel({
 					name="format"
 					value={settings.format}
 					onChange={handleUpdate}
+					disabled={disabled}
 					className="w-full p-2 border border-gray-300 rounded mt-2"
 				>
 					<option value="png">PNG</option>

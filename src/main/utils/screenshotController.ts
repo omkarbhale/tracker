@@ -1,7 +1,7 @@
 import screenshot from "screenshot-desktop";
 import * as path from "path";
-import * as fs from "fs";
 import * as fsp from "fs/promises";
+import { ScreenshotSettings } from "./screenshotSettings";
 
 function getFormattedDate(): string {
 	const now = new Date();
@@ -14,21 +14,18 @@ function getFormattedTime(): string {
 }
 
 export class ScreenshotController {
-	private intervalMs: number;
-	private directory: string;
 	private timer: NodeJS.Timeout | null = null;
 
-	constructor(directory: string, intervalMs: number = 5000) {
-		this.directory = directory;
-		this.intervalMs = intervalMs;
-	}
+	constructor(private settings: ScreenshotSettings) {}
 
 	private async takeScreenshot(): Promise<void> {
-		const dateFolder = path.join(this.directory, getFormattedDate());
-		await fsp.mkdir(dateFolder, { recursive: true });
+		const folder = path.join(this.settings.directory, getFormattedDate());
+		await fsp.mkdir(folder, { recursive: true });
 
-		const filename = `screenshot-${getFormattedTime()}.png`;
-		const filepath = path.join(dateFolder, filename);
+		const filename = `screenshot-${getFormattedTime()}.${
+			this.settings.format
+		}`;
+		const filepath = path.join(folder, filename);
 
 		try {
 			await screenshot({ filename: filepath });
@@ -42,7 +39,7 @@ export class ScreenshotController {
 		this.timer = setTimeout(async () => {
 			await this.takeScreenshot();
 			this.scheduleNext();
-		}, this.intervalMs);
+		}, this.settings.intervalMs);
 	}
 
 	public start(): void {
@@ -60,8 +57,11 @@ export class ScreenshotController {
 		}
 	}
 
-	public updateInterval(newIntervalMs: number): void {
-		this.intervalMs = newIntervalMs;
-		console.log(`Screenshot interval updated to ${newIntervalMs}ms.`);
+	public updateSettings(settings: ScreenshotSettings): void {
+		this.settings = settings;
+		if (this.timer) {
+			this.stop();
+			this.start();
+		}
 	}
 }

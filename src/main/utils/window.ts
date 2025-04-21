@@ -25,7 +25,7 @@ export const createOrShowWindow = () => {
 		minWidth: 800,
 		minHeight: 500,
 	});
-	window.setMenu(null);
+	if (app.isPackaged) window.setMenu(null);
 	window.maximize();
 
 	if (app.isPackaged) {

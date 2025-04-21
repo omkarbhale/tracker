@@ -57,7 +57,7 @@ function App() {
 	}, [isCapturing]);
 
 	return (
-		<div className="flex min-h-screen bg-gray-100">
+		<div className="flex min-h-screen bg-[rgb(30,30,30)]">
 			{/* Sidebar with date and folder navigation */}
 			{/* <Sidebar /> */}
 

@@ -32,8 +32,10 @@ function SettingsPanel({
 	};
 
 	return (
-		<div className="bg-white p-6 rounded-lg shadow-md mb-6">
-			<h2 className="text-xl mb-4">Settings</h2>
+		<div className="bg-[rgb(50,50,50)] text-white p-6 rounded-lg shadow-md mb-6">
+			<h2 className="text-xl mb-4">
+				Settings {disabled ? "(Editing disabled)" : ""}
+			</h2>
 
 			{/* Directory */}
 			<div className="mb-4">

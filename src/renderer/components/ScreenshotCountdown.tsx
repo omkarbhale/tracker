@@ -18,7 +18,7 @@ function ScreenshotCountdown() {
 	}, [secondsRemaining]);
 
 	return (
-		<div className="bg-white p-6 rounded-lg shadow-md mb-6 text-center">
+		<div className="bg-[rgb(50,50,50)] p-6 rounded-lg shadow-md mb-6 text-white text-center">
 			{secondsRemaining > 0 && (
 				<>
 					<h2 className="text-xl mb-4">Next Screenshot in:</h2>

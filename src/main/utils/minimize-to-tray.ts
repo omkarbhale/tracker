@@ -33,4 +33,6 @@ export function minimizeToTray(window: BrowserWindow) {
 	tray.addListener("click", (e, bounds, position) => {
 		createOrShowWindow(); // Makes it visible again
 	});
+
+	tray.setToolTip("Screenshot App"); // Tooltip when hovering over the tray icon
 }

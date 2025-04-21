@@ -30,18 +30,27 @@ function App() {
 
 	useEffect(() => {
 		window.api.invoke("update-settings", settings).then(() => {
-			console.log("Settings updated:", settings);
+			console.log(
+				"Your settings have been updated successfully.",
+				settings
+			);
 		});
 	}, [settings]);
 
 	useEffect(() => {
 		if (isCapturing) {
 			window.api.invoke("start-screenshotting").then(() => {
-				console.log("Screenshotting started");
+				window.api.invoke("show-notification", {
+					title: "Screenshotting Started",
+					body: "Screenshotting has started successfully.",
+				});
 			});
 		} else {
 			window.api.invoke("stop-screenshotting").then(() => {
-				console.log("Screenshotting stopped");
+				window.api.invoke("show-notification", {
+					title: "Screenshotting Stopped",
+					body: "Screenshotting has stopped successfully.",
+				});
 			});
 		}
 	}, [isCapturing]);

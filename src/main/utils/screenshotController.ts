@@ -2,6 +2,7 @@ import screenshot from "screenshot-desktop";
 import * as path from "path";
 import * as fsp from "fs/promises";
 import { ScreenshotSettings } from "./screenshotSettings";
+import { Notification } from "electron";
 
 function getFormattedDate(): string {
 	const now = new Date();
@@ -30,6 +31,12 @@ export class ScreenshotController {
 		try {
 			await screenshot({ filename: filepath });
 			console.log(`Screenshot saved to: ${filepath}`);
+
+			const notification = new Notification({
+				title: "Screenshot Captured",
+				body: `Screenshot saved to ${filepath}`,
+			});
+			notification.show();
 		} catch (err) {
 			console.error("Failed to take screenshot:", err);
 		}

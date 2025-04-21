@@ -63,7 +63,7 @@ function App() {
 				/>
 
 				{/* Screenshot Countdown */}
-				{!isCapturing && <ScreenshotCountdown />}
+				{isCapturing && <ScreenshotCountdown />}
 
 				{/* Screenshot Gallery */}
 				{/* <ScreenshotGallery screenshots={screenshots} /> */}

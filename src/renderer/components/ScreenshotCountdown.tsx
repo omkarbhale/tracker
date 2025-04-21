@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 function ScreenshotCountdown() {
-	const [secondsRemaining, setSecondsRemaining] = useState(10); // Countdown starts at 10 seconds
+	const [secondsRemaining, setSecondsRemaining] = useState(5); // Countdown starts at 10 seconds
 
 	useEffect(() => {
 		if (secondsRemaining === 0) return; // Stop when countdown reaches 0
